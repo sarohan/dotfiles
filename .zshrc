@@ -26,6 +26,8 @@ alias ll='ls -l'
 alias la='ls -al'
 alias szsh='source ~/.zshrc'
 alias home='cd ~'
+alias py2='python2'
+alias py3='python3'
 
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
