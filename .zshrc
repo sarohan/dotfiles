@@ -1,6 +1,15 @@
 # .zshrc
-# Author : Sagar Mohan <sagarmohan846@gmail.com>
+# Author : Sagar Mohan <sar0han@protonmail.com>
 # License : unlicense
+
+# PATH variable
+# prepend environment variables
+path=('/home/user/bin' $path)
+# export to sub-processes (make it inherited by child processes)
+export PATH
+
+# Export npm install dir
+export npm_config_prefix=~/.node_modules
 
 # To "freeze/unfreeze" the terminal. Many programs change the terminal state, and often do not restore
 # terminal settings on exiting abnormally. To avoid the need to manually reset the terminal :
@@ -15,9 +24,9 @@ alias install='sudo pacman -S'
 alias update='sudo pacman -Syu'
 alias remove='sudo pacman -Rns'
 alias dremove='sudo pacman -Runs'
-alias search='sudo pacman -Q'
-alias aur='yaourt'
-alias auru='yaourt -Syu --aur'
+alias search='pacman -Q'
+alias aur='yay'
+alias auru='yay -Syu --aur'
 alias :q='exit'
 alias progs='cd Programs'
 alias rs='rustc'
@@ -27,7 +36,14 @@ alias la='ls -al'
 alias szsh='source ~/.zshrc'
 alias home='cd ~'
 alias py2='python2'
-alias py3='python3'
+alias py='python'
+#alias vim='nvim'
+
+mkcd ()
+{
+  mkdir -p -- "$1" &&
+  cd -P -- "$1"
+}
 
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
@@ -36,7 +52,7 @@ SAVEHIST=25000
 bindkey -v
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
-zstyle :compinstall filename '/home/sagar/.zshrc'
+zstyle :compinstall filename '/home/user/.zshrc'
 
 autoload -Uz compinit promptinit
 compinit
@@ -76,6 +92,9 @@ zstyle ':completion:*' rehash true
 # Dynamic title in terminal window
 autoload -Uz add-zsh-hook
 
+# Load Xresources
+# xrdb ~/.Xresources
+
 function xterm_title_precmd () {
 	print -Pn '\e]2;%n@%m %1~\a'
 }
@@ -89,3 +108,4 @@ if [[ "$TERM" == (screen*|xterm*|rxvt*) ]]; then
 	add-zsh-hook -Uz precmd xterm_title_precmd
 	add-zsh-hook -Uz preexec xterm_title_preexec
 fi
+
